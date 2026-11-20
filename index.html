@@ -22,5 +22,13 @@
 <!-- A escala vem do app do Google (Apps Script), que exige login e e-mail liberado no painel. Esta página não guarda nenhum dado. -->
 <iframe src="https://script.google.com/macros/s/AKfycbwqAmFkrwi7m1RHI-hgRs866_RjRUlubFN5QY8h79JAr3mTGXRYOz_5-4xyGnVgrqkn/exec"
         title="Escala NEVES" allow="clipboard-write"></iframe>
+<!-- Botão que instala direto como app (sem a barra do Chrome). Só aparece no Android/Chrome quando ainda não está instalado. -->
+<button id="instalar" hidden style="position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:9;padding:14px 22px;border:0;border-radius:28px;background:#4a2508;color:#F5C49D;font:bold 16px Roboto,Arial,sans-serif;box-shadow:0 3px 10px rgba(0,0,0,.35)">📲 Instalar o app</button>
+<script>
+var pedido=null, b=document.getElementById('instalar');
+window.addEventListener('beforeinstallprompt',function(e){ e.preventDefault(); pedido=e; b.hidden=false; });
+b.onclick=function(){ if(!pedido) return; pedido.prompt(); pedido.userChoice.then(function(){ pedido=null; b.hidden=true; }); };
+window.addEventListener('appinstalled',function(){ b.hidden=true; });
+</script>
 </body>
 </html>
